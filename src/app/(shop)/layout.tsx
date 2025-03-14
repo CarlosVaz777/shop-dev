@@ -1,3 +1,4 @@
+import { TopMenu } from "@/components";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -11,8 +12,13 @@ export default function ShopLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <main>
-        {children}
+      <main className="min-h-screen">
+        <TopMenu/>
+        
+        <div className="px-0 sm:px-10">
+          {children}
+        </div>
+
       </main>
   );
 }
