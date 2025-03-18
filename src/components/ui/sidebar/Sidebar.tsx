@@ -1,28 +1,52 @@
 'use client'
 
+import { useUIStore } from "@/store"
+import clsx from "clsx"
 import Link from "next/link"
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
 
 
  export const Sidebar = () => {
+
+    const isSideMenuOpen = useUIStore( state => state.isSideMenuOpen );
+    const closeMenu = useUIStore( state => state.closeSideMenu );
     
     return(
         <div>
             {/*  Background color negro */}
-            <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
+            {
+                isSideMenuOpen && (
+                    <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
+                )
+            }
 
             {/*  Blur */}
-            <div className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm" />
+            {
+                isSideMenuOpen && (
+                    
+                    <div 
+                        onClick={ closeMenu } 
+                        className="fade-in fixed top-0 left-0 w-screen h-screen z-10 backdrop-filter backdrop-blur-sm" 
+                    />
+                )
+            }
 
             {/* Sidemenu */}
             <nav 
                 //Efecto navbar lateral derecho
-                className="fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300">
+                className={
+                    clsx(
+                        "fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300",
+                        {
+                            "translate-x-full": !isSideMenuOpen
+                        }
+                    )
+                }>
                 
-                <IoCloseOutline 
+                <IoCloseOutline  
                     size={ 50 }
                     className="absolute top-5 right-5 cursor-pointer"
-                    onClick={ () => console.log('click')}
+                    onClick={ () => closeMenu() }
                 />
 
 
@@ -36,74 +60,74 @@ import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPer
                         />
                 </div>
 
-            {/* Mneú */}
+                {/* Mneú */}
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoPersonOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Perfil</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoPersonOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Perfil</span>
 
-            </Link>
+                </Link>
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoTicketOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Órdenes</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoTicketOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Órdenes</span>
 
-            </Link>
+                </Link>
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoLogInOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Ingresar</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoLogInOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Ingresar</span>
 
-            </Link>
+                </Link>
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoLogOutOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Salir</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoLogOutOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Salir</span>
 
-            </Link>
+                </Link>
 
-            {/* Dividir con una línea los nav */}
-            <div className="w-full h-px bg-gray-300 my-10" />
+                {/* Dividir con una línea los nav */}
+                <div className="w-full h-px bg-gray-300 my-10" />
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoShirtOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Productos</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoShirtOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Productos</span>
 
-            </Link>
+                </Link>
 
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoTicketOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Órdenes</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoTicketOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Órdenes</span>
 
-            </Link>
+                </Link>
 
-            <Link 
-                href="/"
-                className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-            >
-                <IoPeopleOutline size={ 30 }/>
-                <span className="ml-3 text-xl">Usuarios</span>
+                <Link 
+                    href="/"
+                    className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                >
+                    <IoPeopleOutline size={ 30 }/>
+                    <span className="ml-3 text-xl">Usuarios</span>
 
-            </Link>
+                </Link>
             
             </nav>
         </div>
