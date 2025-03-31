@@ -12,8 +12,8 @@ export const  QuantitySelector = ( { quantity }: Props ) => {
     const [count, setCount] = useState( quantity );
 
     const onQuantityChanged = ( value: number ) => {
-        /*Sumar la canitdad si no colcoar 1*/
-        if (count + value < 1 ) return;
+        /*Sumar la cantidad si no colocar 1*/
+        if (count + value <= 1 ) return;
 
         setCount( count + value );
     }
